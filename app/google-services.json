@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "453928129010",
+    "firebase_url": "https://confirm2me-6b36d.firebaseio.com",
+    "project_id": "confirm2me-6b36d",
+    "storage_bucket": "confirm2me-6b36d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453928129010:android:2faea26fac638227",
+        "android_client_info": {
+          "package_name": "com.erik.confirm2me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453928129010-qni69np4kcmfc5fqr9hhdsefqdscldd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUzP8BaimsxfVspt1GryDxAklWi5TnpBE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

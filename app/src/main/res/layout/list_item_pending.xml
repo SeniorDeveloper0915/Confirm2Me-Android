@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@color/White"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/dotRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/small"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_bluedot"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:id="@+id/txtRequesterName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                app:typeface="lato" />
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/micro"
+                android:gravity="right"
+                app:typeface="lato"
+                android:text="(requester)"
+                android:textColor="@color/GrayColor"
+                android:textSize="@dimen/text_xsmall"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/arrowRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/small"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/request_logo"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:id="@+id/txtAffidavit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/micro"
+                android:gravity="center_vertical"
+                app:typeface="lato_bold"
+                android:text="Affidavit0"
+                android:textColor="@color/DarkGrayColor"
+                android:textSize="@dimen/text_small"/>
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/arrowProvider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/small"
+            android:scaleType="centerCrop" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                        android:id="@+id/txtProviderName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:textColor="@color/Black"
+                        android:textSize="@dimen/text_small"
+                        app:typeface="lato" />
+
+                    <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/micro"
+                        android:gravity="left"
+                        app:typeface="lato"
+                        android:text="(provider)"
+                        android:textColor="@color/GrayColor"
+                        android:textSize="@dimen/text_xsmall"/>
+                </LinearLayout>
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                    android:id="@+id/txtRequestDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/small"
+                    android:gravity="right"
+                    android:layout_gravity="bottom"
+                    app:typeface="lato"
+                    android:text="Dec/03/2015"
+                    android:textColor="@color/DarkGrayColor"
+                    android:textSize="@dimen/text_xsmall"/>
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/one"
+        android:src="@drawable/line_grey"
+        android:scaleType="centerCrop"/>
+
+</LinearLayout>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Navigatioin View -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/NavigationColor">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:padding="@dimen/medium"
+            android:src="@drawable/icon_back"
+            android:background="@android:color/transparent"
+            />
+
+        <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:typeface="lato"
+            android:textColor="@color/White"
+            android:textSize="@dimen/text_medium"
+            android:text="Message to Read"/>
+
+        <com.erik.confirm2me.customcontrol.Confirm2MeButton
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            app:typeface="lato"
+            android:textSize="@dimen/text_small"
+            android:text="SEND"
+            android:textColor="@color/White"
+            android:background="@null"/>
+
+
+    </FrameLayout> <!-- Navigation View -->
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Camera & Video View -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="@dimen/small">
+
+                <LinearLayout
+                    android:id="@+id/cameraPreview"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"/>
+
+                <FrameLayout
+                    android:id="@+id/videoPreview"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:visibility="invisible">
+
+                    <ImageView
+                        android:id="@+id/thumbnailView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        tools:src="@drawable/ex_singer_taylor"/>
+
+                    <ImageButton
+                        android:id="@+id/btnPlayVideo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/btn_videoplay"
+                        android:background="@null"/>
+                </FrameLayout>
+
+            </FrameLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_circle_indicator_stroke_width"
+            android:background="@drawable/line_grey"/>
+
+        <!-- CATEGORY -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/medium"
+                android:layout_gravity="center_vertical"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:text="CATEGORY"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_circle_indicator_stroke_width"
+            android:background="@drawable/line_grey"/>
+
+        <!-- Message -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:id="@+id/txtMessage"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:padding="@dimen/medium"
+                app:typeface="opensans_semi_bold"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_medium"
+                tools:text="We need a simple mobile application for our camp. It mainly is an informational app to keep parents updated on all things happening. The app needs would allow us to funnel all of our social media posts (twitter, instagram, Facebook, blog, etc"/>
+
+
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_circle_indicator_stroke_width"
+            android:background="@drawable/line_grey"/>
+
+        <!-- Requester -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeButton
+                android:id="@+id/btnRecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/medium"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                app:typeface="lato_bold"
+                android:textSize="@dimen/text_small"
+                android:text="Start"
+                android:textColor="@color/White"
+                android:background="@drawable/login_btn_login"/>
+
+        </TableRow>
+
+
+
+    </TableLayout>
+
+</LinearLayout>

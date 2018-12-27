@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <!-- Navigatioin View -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/NavigationColor">
+
+        <com.erik.confirm2me.customcontrol.Confirm2MeButton
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            app:typeface="lato"
+            android:textSize="@dimen/text_small"
+            android:text="LogOut"
+            android:textAllCaps="false"
+            android:textColor="@color/White"
+            android:background="@null"/>
+
+        <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:typeface="lato"
+            android:textColor="@color/White"
+            android:textSize="@dimen/text_medium"
+            android:text="My Profile"/>
+
+        <com.erik.confirm2me.customcontrol.Confirm2MeButton
+            android:id="@+id/btnDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            app:typeface="lato"
+            android:textSize="@dimen/text_small"
+            android:text="Edit"
+            android:textAllCaps="false"
+            android:textColor="@color/White"
+            android:background="@null"/>
+
+    </FrameLayout> <!-- Navigation View -->
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/White">
+
+        <!-- First Name -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/micro"
+            android:paddingBottom="@dimen/micro"
+            android:paddingLeft="@dimen/small"
+            android:paddingRight="@dimen/small">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:text="First Name:"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtFirstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/text_xsmall"
+                android:paddingRight="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                app:typeface="lato"
+                tools:text="Thomas"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@drawable/bg_profile_textfield"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one"
+            android:background="@drawable/line_grey"/>
+
+        <!-- Last Name -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/micro"
+            android:paddingBottom="@dimen/micro"
+            android:paddingLeft="@dimen/small"
+            android:paddingRight="@dimen/small">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:text="Last Name:"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtLastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/text_xsmall"
+                android:paddingRight="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                app:typeface="lato"
+                tools:text="Thomas"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@drawable/bg_profile_textfield"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_circle_indicator_stroke_width"
+            android:background="@drawable/line_grey"/>
+
+        <!-- User Name -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/micro"
+            android:paddingBottom="@dimen/micro"
+            android:paddingLeft="@dimen/small"
+            android:paddingRight="@dimen/small">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:text="Username:"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/text_xsmall"
+                android:paddingRight="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                app:typeface="lato"
+                tools:text="Thomas"
+                android:textColor="@color/GrayColor"
+                android:textSize="@dimen/text_small"
+                android:background="@drawable/bg_profile_textfield"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_circle_indicator_stroke_width"
+            android:background="@drawable/line_grey"/>
+
+        <!-- Email -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/micro"
+            android:paddingBottom="@dimen/micro"
+            android:paddingLeft="@dimen/small"
+            android:paddingRight="@dimen/small">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:text="Email:"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/text_xsmall"
+                android:paddingRight="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                app:typeface="lato"
+                tools:text="thomas@gmail.com"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@drawable/bg_profile_textfield"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_circle_indicator_stroke_width"
+            android:background="@drawable/line_grey"/>
+
+        <!-- New Password -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/micro"
+            android:paddingBottom="@dimen/micro"
+            android:paddingLeft="@dimen/small"
+            android:paddingRight="@dimen/small">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:text="New Password:"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/text_xsmall"
+                android:paddingRight="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                app:typeface="lato"
+                tools:text="password"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@drawable/bg_profile_textfield"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_circle_indicator_stroke_width"
+            android:background="@drawable/line_grey"/>
+
+        <!-- Confirm Password -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/micro"
+            android:paddingBottom="@dimen/micro"
+            android:paddingLeft="@dimen/small"
+            android:paddingRight="@dimen/small">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:text="Confirm:"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/text_xsmall"
+                android:paddingRight="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                app:typeface="lato"
+                tools:text="password"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@drawable/bg_profile_textfield"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_circle_indicator_stroke_width"
+            android:background="@drawable/line_grey"/>
+
+        <!-- Mobile Phone # -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/micro"
+            android:paddingBottom="@dimen/micro"
+            android:paddingLeft="@dimen/small"
+            android:paddingRight="@dimen/small">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="@dimen/small"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:text="Mobile Phone#:"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtMobilePhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/text_xsmall"
+                android:paddingRight="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                app:typeface="lato"
+                tools:text="1234567890"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@drawable/bg_profile_textfield"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_circle_indicator_stroke_width"
+            android:background="@drawable/line_grey"/>
+
+        <!-- Change PIN -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/micro"
+            android:paddingBottom="@dimen/micro"
+            android:paddingLeft="@dimen/small"
+            android:paddingRight="@dimen/small">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:text="Change PIN:"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtPin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/text_xsmall"
+                android:paddingRight="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
+                app:typeface="lato"
+                tools:text="123456"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@drawable/bg_profile_textfield"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_circle_indicator_stroke_width"
+            android:background="@drawable/line_grey"/>
+
+    </TableLayout>
+
+</LinearLayout>

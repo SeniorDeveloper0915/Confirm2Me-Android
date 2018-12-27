@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="AppColor">#1bbc9c</color>
+    <color name="BackgroundColor">#FFFFFF</color>
+
+
+    <!-- Navigation -->
+    <color name="NavigationColor">#17A8D0</color>
+
+    <!-- Tab -->
+    <color name="TabNormal">#969696</color>
+    <color name="TabSelected">#FFFFFF</color>
+
+
+    <color name="White">#FFFFFF</color>
+    <color name="Black">#000000</color>
+    <color name="GrayColor">#888888</color>
+    <color name="BlueColor">#0000FF</color>
+    <color name="LightGrayColor">#F6F6F6</color>
+    <color name="DarkGrayColor">#7F7F7F</color>
+    <color name="GreenColor">#22C064</color>
+    <color name="RedColor">#FF0000</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+</resources>

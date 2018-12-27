@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/mainLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/login_bg"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_logo_top"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/login_logo"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/large"
+            android:paddingLeft="@dimen/xlarge"
+            android:paddingRight="@dimen/xlarge"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@drawable/login_bg_textfield">
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                    android:id="@+id/txtUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/text_xsmall"
+                    android:layout_marginRight="@dimen/text_xsmall"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
+                    app:typeface="lato"
+                    android:textColor="@color/White"
+                    android:textSize="@dimen/text_small"
+                    android:background="@android:color/transparent"
+                    android:hint="Username"
+                    android:textColorHint="@color/White"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="@dimen/small"
+                android:background="@drawable/login_bg_textfield">
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                    android:id="@+id/txtPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/text_xsmall"
+                    android:layout_marginRight="@dimen/text_xsmall"
+                    android:singleLine="true"
+                    android:imeOptions="actionGo"
+                    android:inputType="textPassword"
+                    app:typeface="lato"
+                    android:textColor="@color/White"
+                    android:textSize="@dimen/text_small"
+                    android:background="@android:color/transparent"
+                    android:hint="Password"
+                    android:textColorHint="@color/White"/>
+            </FrameLayout>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeButton
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/medium"
+                app:typeface="lato_bold"
+                android:textSize="@dimen/text_light"
+                android:text="Login"
+                android:textAllCaps="true"
+                android:textColor="@color/White"
+                android:background="@drawable/login_btn_login"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeButton
+                android:id="@+id/btnSignup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/medium"
+                app:typeface="lato_bold"
+                android:textSize="@dimen/text_light"
+                android:text="Sign Up"
+                android:textAllCaps="true"
+                android:textColor="@color/White"
+                android:background="@drawable/login_btn_signup"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeButton
+                android:id="@+id/btnForgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:padding="@dimen/small"
+                android:text="Forgot Password?"
+                android:textColor="@color/White"
+                android:textSize="@dimen/text_small"
+                android:textAllCaps="false"/>
+
+            
+        </LinearLayout>
+
+        </LinearLayout>
+
+
+        <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_margin="@dimen/large"
+            android:text="@string/app_login_comment"
+            android:textAlignment="center"
+            android:textColor="@color/White"
+            android:textSize="@dimen/text_xsmall"
+            app:typeface="lato_bold" />
+    </FrameLayout>
+</LinearLayout>

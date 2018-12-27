@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Confirm2MeTextView">
+        <attr name="typeface" />
+    </declare-styleable>
+    <declare-styleable name="Confirm2MeButton">
+        <attr name="typeface" />
+    </declare-styleable>
+    <declare-styleable name="Confirm2MeEditText">
+        <attr name="typeface" />
+    </declare-styleable>
+    <attr name="typeface">
+        <enum name="lato" value="0" />
+        <enum name="lato_bold" value="1" />
+        <enum name="opensans" value="2" />
+        <enum name="opensans_semi_bold" value="3" />
+    </attr>
+</resources>

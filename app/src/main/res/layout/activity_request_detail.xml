@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Navigatioin View -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/NavigationColor">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:padding="@dimen/medium"
+            android:src="@drawable/icon_back"
+            android:background="@android:color/transparent"
+            />
+
+        <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:typeface="lato"
+            android:textColor="@color/White"
+            android:textSize="@dimen/text_medium"
+            android:text="Request Detail"/>
+
+
+
+    </FrameLayout> <!-- Navigation View -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/White"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Category -->
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium">
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:typeface="lato"
+                    android:textColor="@color/Black"
+                    android:textSize="@dimen/text_small"
+                    android:text="CATEGORY"/>
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                    android:id="@+id/txtCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    app:typeface="lato"
+                    android:textColor="@color/GrayColor"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/text_small"
+                    tools:text="Affidavit1"/>
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                    android:id="@+id/txtRequestDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:typeface="lato"
+                    android:textColor="@color/GrayColor"
+                    android:textSize="@dimen/text_small"
+                    tools:text="Dec/08/2015"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_circle_indicator_stroke_width"
+                android:background="@drawable/line_grey"/>
+
+            <!-- Message-->
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/small"
+                android:paddingLeft="@dimen/medium"
+                android:paddingRight="@dimen/medium">
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_span="3"
+                    app:typeface="lato"
+                    android:textColor="@color/Black"
+                    android:textSize="@dimen/text_small"
+                    android:text="MESSAGE"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium">
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                    android:id="@+id/txtMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_span="3"
+                    app:typeface="lato"
+                    android:textColor="@color/Black"
+                    android:textSize="@dimen/text_small"
+                    tools:text="We need a simple mobile application for our camp. It mainly is an informational app to keep parents updated on all things happening. The app needs would allow us to funnel all of our social media posts (twitter, instagram, Facebook, blog, etc"/>
+
+            </TableRow>
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_circle_indicator_stroke_width"
+                android:background="@drawable/line_grey"/>
+
+            <!-- Requester -->
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium">
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:typeface="lato"
+                    android:textColor="@color/Black"
+                    android:textSize="@dimen/text_small"
+                    android:text="REQUESTER"/>
+
+                <ImageView
+                    android:id="@+id/arrowRequest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    tools:src="@drawable/arrow_requester_pending"/>
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                    android:id="@+id/txtRequesterName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:typeface="lato"
+                    android:textColor="@color/GrayColor"
+                    android:textSize="@dimen/text_small"
+                    tools:text="Erik Levin"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_circle_indicator_stroke_width"
+                android:background="@drawable/line_grey"/>
+
+            <!-- Provider -->
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium">
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:typeface="lato"
+                    android:textColor="@color/Black"
+                    android:textSize="@dimen/text_small"
+                    android:text="PROVIDER"/>
+
+                <ImageView
+                    android:id="@+id/arrowProvider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    tools:src="@drawable/arrow_provider_accept"/>
+
+                <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+                    android:id="@+id/txtProviderName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:typeface="lato"
+                    android:textColor="@color/GrayColor"
+                    android:textSize="@dimen/text_small"
+                    tools:text="Thomas Szoke"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_circle_indicator_stroke_width"
+                android:background="@drawable/line_grey"/>
+
+        </TableLayout>
+
+
+        <!-- Video Player -->
+        <RelativeLayout
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/thumbnailView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/ex_singer_taylor"/>
+
+            <VideoView
+                android:id="@+id/videoPlayingView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <ImageButton
+                android:id="@+id/btnPlayVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/detail_btn_playvideo"
+                android:background="@null"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:id="@+id/buttonView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/small"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeButton
+                android:id="@+id/btnDecline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                app:typeface="lato_bold"
+                android:textSize="@dimen/text_small"
+                android:text="DECLINE"
+                android:textColor="@color/White"
+                android:background="@drawable/detail_btn_decline"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            </LinearLayout>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeButton
+                android:id="@+id/btnAccept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                app:typeface="lato_bold"
+                android:textSize="@dimen/text_small"
+                android:text="ACCEPT"
+                android:textColor="@color/White"
+                android:background="@drawable/detail_btn_accept"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

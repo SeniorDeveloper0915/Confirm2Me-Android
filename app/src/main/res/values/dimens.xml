@@ -1,0 +1,40 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Navigation -->
+    <dimen name="navigation_height">44dp</dimen>
+
+    <!-- Splash -->
+    <dimen name="splash_logo_top">60dp</dimen>
+    <dimen name="splash_copyright_bottom">30dp</dimen>
+
+    <!-- Login -->
+    <dimen name="login_logo_top">40dp</dimen>
+    <dimen name="login_button_width">256dp</dimen>
+    <dimen name="login_button_height">46dp</dimen>
+    <dimen name="login_button_margin_bottom">30dp</dimen>
+
+
+    <!-- General -->
+    <dimen name="xlarge">48dp</dimen>
+    <dimen name="large">24dp</dimen>
+    <dimen name="medium">16dp</dimen>
+    <dimen name="small">8dp</dimen>
+    <dimen name="light">6dp</dimen>
+    <dimen name="micro">4dp</dimen>
+    <dimen name="tiny">2dp</dimen>
+    <dimen name="one">1dp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="text_micro">8sp</dimen>
+    <dimen name="text_xsmall">10sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_light">14sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_large">20sp</dimen>
+    <dimen name="text_huge">26sp</dimen>
+    <dimen name="default_circle_indicator_stroke_width">1dp</dimen>
+
+</resources>

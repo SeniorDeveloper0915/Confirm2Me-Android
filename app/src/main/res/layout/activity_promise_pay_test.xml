@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <!-- Navigatioin View -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/NavigationColor">
+
+        <com.erik.confirm2me.customcontrol.Confirm2MeButton
+            android:id="@+id/btnCancel"
+            android:layout_width="54dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical|left"
+            app:typeface="lato"
+            android:textSize="@dimen/text_small"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/White"
+            android:background="@null"
+            android:visibility="gone"/>
+
+        <com.erik.confirm2me.customcontrol.Confirm2MeTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            app:typeface="lato"
+            android:textColor="@color/White"
+            android:textSize="@dimen/text_medium"
+            android:text="Create Card Account"/>
+
+        <com.erik.confirm2me.customcontrol.Confirm2MeButton
+            android:id="@+id/btnDone"
+            android:layout_width="54dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical|right"
+            app:typeface="lato"
+            android:textSize="@dimen/text_small"
+            android:text="Done"
+            android:textAllCaps="false"
+            android:textColor="@color/White"
+            android:background="@null"
+            android:visibility="gone"/>
+
+    </FrameLayout> <!-- Navigation View -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/LightGrayColor"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/White"
+            android:orientation="vertical">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@android:color/transparent"
+                android:hint="Name on Card"
+                android:textColorHint="@color/GrayColor"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/one"
+                android:src="@drawable/line_grey"
+                android:scaleType="centerCrop"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtCardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@android:color/transparent"
+                android:hint="Card Number"
+                android:textColorHint="@color/GrayColor"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/one"
+                android:src="@drawable/line_grey"
+                android:scaleType="centerCrop"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtExpMonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@android:color/transparent"
+                android:hint="Card Expiry Month"
+                android:textColorHint="@color/GrayColor"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/one"
+                android:src="@drawable/line_grey"
+                android:scaleType="centerCrop"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtExpYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@android:color/transparent"
+                android:hint="Card Expiry Year"
+                android:textColorHint="@color/GrayColor"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/one"
+                android:src="@drawable/line_grey"
+                android:scaleType="centerCrop"/>
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeEditText
+                android:id="@+id/txtCVC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/text_xsmall"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:inputType="numberDecimal"
+                app:typeface="lato"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_small"
+                android:background="@android:color/transparent"
+                android:hint="CVC"
+                android:textColorHint="@color/GrayColor"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/one"
+                android:src="@drawable/line_grey"
+                android:scaleType="centerCrop"/>
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal|bottom"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <com.erik.confirm2me.customcontrol.Confirm2MeButton
+                android:id="@+id/btnCreateCardAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/medium"
+                app:typeface="lato_bold"
+                android:textSize="@dimen/text_light"
+                android:text="Create Card Account"
+                android:textAllCaps="true"
+                android:textColor="@color/White"
+                android:background="@drawable/login_btn_login"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.erik.confirm2me" >
+
+    <permission
+        android:name="com.erik.confirm2me.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature"/>
+    <permission
+        android:protectionLevel="signature"
+        android:name="com.erik.confirm2me.permission.C2D_MESSAGE" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="com.erik.confirm2me.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.android.vending.BILLING"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.erik.confirm2me.permission.C2D_MESSAGE" />
+
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.front" />
+    <uses-feature android:name="android.hardware.microphone"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+
+
+    <application
+        android:name="com.erik.confirm2me.UIApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <uses-library android:name="com.google.android.maps" />
+        <activity
+            android:name="com.erik.confirm2me.activity.SplashActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.erik.confirm2me.activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.erik.confirm2me.activity.SignupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.erik.confirm2me.activity.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.erik.confirm2me.activity.VerifyPinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RequestDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MessageReadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.erik.confirm2me.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/google_maps_api_key" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
+        <activity
+            android:name=".PromisePay.PromisePayTestActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".activity.MyFirebaseMessagingService"
+            android:permission="com.google.android.c2dm.permission.RECEIVE">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".helper.Confirm2MeReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+                <action android:name="com.erik.confirm2me.helper.Confirm2MeReceiver.UPDATE_TRACK" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <!--
+                  IMPORTANT: Change "com.parse.starter" to match your app's package name.
+                -->
+                <category android:name="com.erik.confirm2me" />
+            </intent-filter>
+        </receiver>
+
+        <!-- FIXME: Make this more granular. -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.erik.confirm2me.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths"/>
+
+        </provider>
+        <provider android:authorities="com.facebook.app.FacebookContentProvider705108376260405"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
+
+    </application>
+</manifest>
