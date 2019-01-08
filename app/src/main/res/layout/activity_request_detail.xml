@@ -227,21 +227,21 @@
             android:layout_weight="1"
             android:visibility="visible">
 
-            <ImageView
-                android:id="@+id/thumbnailView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/ex_singer_taylor"/>
-
             <VideoView
                 android:id="@+id/videoPlayingView"
-                android:layout_alignParentTop="true"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_alignParentTop="true" />
+
+            <ImageView
+                android:id="@+id/thumbnailView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                tools:src="@drawable/ex_singer_taylor" />
+
             <ImageButton
                 android:id="@+id/btnPlayVideo"
                 android:layout_width="wrap_content"
@@ -250,7 +250,7 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/detail_btn_playvideo"
                 android:background="@null"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
         </RelativeLayout>
 

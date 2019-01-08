@@ -108,6 +108,7 @@ public class GivenFragment extends Fragment implements View.OnClickListener{
                         // delete
                         //can delete if requester has declined only!
                         try {
+
                             delRequest = mRequests.getJSONObject(position);
                             if (delRequest.get("sender_status").toString().equals(Global.kSenderStatusDeclined)) {
                                 // Try to Delete
@@ -116,6 +117,7 @@ public class GivenFragment extends Fragment implements View.OnClickListener{
                                     public void onClick(DialogInterface dialog, int which) {
                                         switch (which) {
                                             case R.id.menu_verify_pin: {
+                                                Global.fragment = 1;
                                                 getActivity().startActivityForResult(new Intent(getActivity(), VerifyPinActivity.class), REQUEST_VERIFY_PIN);
                                                 break;
                                             }
@@ -144,8 +146,7 @@ public class GivenFragment extends Fragment implements View.OnClickListener{
                 try {
                     if (requestObject.getInt("receiver_mail_unread") == 0) {
                         mProgressDialog.show();
-                        requestObject.put("receiver_mail_unread", false);
-
+//                        requestObject.put("receiver_mail_unread", false);
                         Global.url = Global.baseUrl + Global.updateReceiverMail;
                         Global.client = new AsyncHttpClient(true, 80, 443);
                         Global.params = new RequestParams();
@@ -225,10 +226,10 @@ public class GivenFragment extends Fragment implements View.OnClickListener{
                 Global.params = new RequestParams();
                 try {
                     Global.params.put("idx", delRequest.get("id").toString());
+                    Global.params.setUseJsonStreamer(true);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Global.params.setUseJsonStreamer(true);
                 Global.client.delete(Global.url, Global.params, new TextHttpResponseHandler() {
 
                             @Override
@@ -243,7 +244,7 @@ public class GivenFragment extends Fragment implements View.OnClickListener{
                                     JSONObject response = new JSONObject(responseString);
                                     if (response.getBoolean("Success") == true) {
                                         loadRequestData();
-                                        Log.d("PendingFragment", "Deleted the request.");
+                                        Log.d("GivenFragment", "Deleted the request.");
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

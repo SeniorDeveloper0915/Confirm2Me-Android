@@ -193,17 +193,28 @@ public class MainActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (MyProfileFragment.mFragment != null) {
-            MyProfileFragment.mFragment.onActivityResult(requestCode, resultCode, data);
+        if (Global.fragment == 2) {
+            if (MyProfileFragment.mFragment != null) {
+                MyProfileFragment.mFragment.onActivityResult(requestCode, resultCode, data);
+            }
         }
-        if (PendingFragment.mFragment != null) {
-            PendingFragment.mFragment.onActivityResult(requestCode, resultCode, data);
+
+        if (Global.fragment == 4 ){
+            if (PendingFragment.mFragment != null) {
+                PendingFragment.mFragment.onActivityResult(requestCode, resultCode, data);
+            }
         }
-        if (GivenFragment.mFragment != null) {
-            GivenFragment.mFragment.onActivityResult(requestCode, resultCode, data);
+
+        if (Global.fragment == 1) {
+            if (GivenFragment.mFragment != null) {
+                GivenFragment.mFragment.onActivityResult(requestCode, resultCode, data);
+            }
         }
-        if (NewFragment.mFragment != null) {
-            NewFragment.mFragment.onActivityResult(requestCode, resultCode, data);
+
+        if (Global.fragment == 3) {
+            if (NewFragment.mFragment != null) {
+                NewFragment.mFragment.onActivityResult(requestCode, resultCode, data);
+            }
         }
     }
 

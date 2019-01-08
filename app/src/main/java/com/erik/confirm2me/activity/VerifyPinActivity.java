@@ -81,7 +81,7 @@ public class VerifyPinActivity extends Activity implements View.OnClickListener 
             if (loginPreference.getString("PIN", "").equals(pin)) {
                 hideKeyboard();
                 Intent returnIntent = new Intent();
-                setResult(Activity.RESULT_OK,returnIntent);
+                setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             } else {
                 Toast.makeText(VerifyPinActivity.this, "PIN does not match!", Toast.LENGTH_LONG).show();

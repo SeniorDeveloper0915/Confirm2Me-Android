@@ -60,10 +60,12 @@ public class Global {
 
 	public static String providerUrl 			= "/userbyprovider";
 	public static String requesterUrl 			= "/userbyrequester";
+	public static String emailUrl 				= "/userbyemail";
+
 	public static String senderStatusUrl 		= "/updatesenderstatus";
 	public static String receiverStatusUrl 		= "/updatereceiverstatus";
-	public static String getsenderStatusUrl 	= "/getsenderstatus?";
 	public static String updateReceiverMail 	= "/updatereceivermail";
+	public static String resetPassword 			= "/resetpassword";
 	public static String updateSenderMail 		= "/updatesendermail";
 	public static String deleteRequestUrl 		= "/deleterequest";
 
@@ -80,6 +82,7 @@ public class Global {
 	public static String providerFirstName		= "";
 	public static String providerLastName 		= "";
 	public static String key 					= "key=AIzaSyB3vwzJRn99TTq7xlY5oCK_cxIv6UdRW9c";
+	public static int 	 fragment 				= 0;
 	public static AsyncHttpClient 	client		= null;
 	public static RequestParams 	params		= null;
 	public static JsonArrayRequest arrReq = null;

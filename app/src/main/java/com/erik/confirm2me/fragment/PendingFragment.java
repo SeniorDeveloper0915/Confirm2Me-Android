@@ -127,13 +127,14 @@ public class PendingFragment extends Fragment implements View.OnClickListener{
                         //can delete if provider was declined only!
                         try {
                             delRequest = mRequests.getJSONObject(position);
-                            if (delRequest.get("receiver_status").toString().equals(Global.kSenderStatusDeclined)) {
+                            if (delRequest.get("receiver_status").toString().equals(Global.kProviderStatusDeclined)) {
                                 // Try to Delete
                                 new BottomSheet.Builder(getActivity()).title("Choose the way to verify you").sheet(R.menu.menu_verify).listener(new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         switch (which) {
                                             case R.id.menu_verify_pin: {
+                                                Global.fragment = 4;
                                                 getActivity().startActivityForResult(new Intent(getActivity(), VerifyPinActivity.class), REQUEST_VERIFY_PIN);
                                                 break;
                                             }

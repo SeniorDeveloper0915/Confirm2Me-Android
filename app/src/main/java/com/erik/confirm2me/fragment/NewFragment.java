@@ -54,6 +54,7 @@ import com.erik.confirm2me.activity.SignupActivity;
 import com.erik.confirm2me.customcontrol.Confirm2MeButtonListener;
 import com.erik.confirm2me.helper.BillingService;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.parse.FindCallback;
@@ -72,12 +73,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 import me.leolin.shortcutbadger.ShortcutBadger;
@@ -225,14 +228,22 @@ public class NewFragment extends Fragment implements View.OnClickListener {
                             response = new JSONObject(responseString);
                             if (response.getBoolean("Success") == true) {
                                 JSONObject user = response.getJSONArray("User").getJSONObject(0);
-                                if (user.get("phonenumber").equals(loginPreference.getString("phonenumber", "")) == true) {
+                                if (user.getString("phonenumber").equals(loginPreference.getString("phonenumber", "")) == true) {
                                     Toast.makeText(getActivity(), "You cannot send Affidavit Request for yourself!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     saveNewRequest(user);
                                 }
                             } else {
-                                SmsManager smsManager = SmsManager.getDefault();
-                                smsManager.sendTextMessage(mobilePhone, null, categoryDescription, null, null);
+                                new AlertDialog.Builder(getContext())
+                                        .setMessage("This phonenumber is not registered in this app")
+                                        .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                SmsManager smsManager = SmsManager.getDefault();
+                                                smsManager.sendTextMessage(mobilePhone, null, categoryDescription, null, null);
+                                            }
+                                        })
+                                        .show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -296,7 +307,7 @@ public class NewFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void saveNewRequest(JSONObject user, String affidavit)
+    private void saveNewRequest(final JSONObject user, String affidavit)
     {
         mProgressDialog.show();
         SharedPreferences loginPreference = getContext().getSharedPreferences("login", 0);
@@ -339,12 +350,53 @@ public class NewFragment extends Fragment implements View.OnClickListener {
                                 mCategoryTitle.setText(null);
                                 mCategoryDescription.setText(null);
                                 Toast.makeText(getActivity(), "Successfully Submitted!", Toast.LENGTH_SHORT).show();
+                                sendPushnotification(user);
+                                startActivity(new Intent(getContext(), GivenFragment.class));
                             } else {
                                 Toast.makeText(getActivity(), response.getString("Message"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
+                });
+    }
+
+    public void sendPushnotification(JSONObject toUser) {
+        String pushMsg = null;
+        SharedPreferences loginPreference = getContext().getSharedPreferences("login", 0);
+        pushMsg = String.format("%s %s has sent you a new Affidavit Request!", loginPreference.getString("firstname", ""), loginPreference.getString("lastname", ""));
+
+        Global.client = new AsyncHttpClient();
+        Global.client.addHeader("Content-Type", "application/json");
+        Global.client.addHeader("Authorization", Global.key);
+        JSONObject jsonParams = new JSONObject();
+        StringEntity jsonEntity = null;
+
+        try {
+            jsonParams.put("to", toUser.getString("FCM_Token"));
+            JSONObject notification = new JSONObject();
+            notification.put("title", "Confirm2Me");
+            notification.put("body", pushMsg);
+            jsonParams.put("notification", notification);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            jsonEntity = new StringEntity(jsonParams.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Global.client.post(getContext(), "https://fcm.googleapis.com/fcm/send", jsonEntity, "application/json",
+                new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        super.onSuccess(statusCode, headers, response);
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        super.onFailure(statusCode, headers, throwable, errorResponse);
                     }
                 });
     }

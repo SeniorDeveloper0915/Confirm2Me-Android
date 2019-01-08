@@ -1,26 +1,41 @@
 package com.erik.confirm2me.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.erik.confirm2me.Global;
 import com.erik.confirm2me.R;
 import com.erik.confirm2me.customcontrol.Confirm2MeButtonListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.internal.*;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 
 public class ForgotPasswordActivity extends Activity implements View.OnClickListener {
 
     private static String TAG = "ForgotPasswordActivity";
     private EditText txtEmail;
-
     private Button cancelButton;
     private Button resetButton;
-
     private ProgressDialog mProgressDialog;
 
     @Override
@@ -64,46 +79,44 @@ public class ForgotPasswordActivity extends Activity implements View.OnClickList
             imm.hideSoftInputFromWindow(txtEmail.getWindowToken(), 0);
 
             mProgressDialog.show();
-//
-//            ParseQuery<ParseUser> query = ParseUser.getQuery();
-//            query.whereEqualTo("email", email);
-//            query.findInBackground(new FindCallback<ParseUser>() {
-//                public void done(List<ParseUser> objects, ParseException e) {
-//                    if (e == null) {
-//                        // The query was successful.
-//                        if (objects.size() > 0) {
-//                            // user is exists
-//                            ParseUser.requestPasswordResetInBackground(email, new RequestPasswordResetCallback() {
-//
-//                                @Override
-//                                public void done(ParseException e) {
-//                                    mProgressDialog.dismiss();
-//                                    if (e == null) {
-//                                        new AlertDialog.Builder(ForgotPasswordActivity.this)
-//                                                .setMessage("We will send the reset password link to your email address soon!")
-//                                                .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-//                                                    @Override
-//                                                    public void onClick(DialogInterface dialog, int which) {
-//                                                        finish();
-//                                                    }
-//                                                })
-//                                                .show();
-//                                    } else {
-//                                        Toast.makeText(ForgotPasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-//                                    }
-//                                }
-//                            });
-//
-//                        } else {
-//                            mProgressDialog.dismiss();
-//                            Toast.makeText(ForgotPasswordActivity.this, "This email is not exists", Toast.LENGTH_LONG).show();
-//                        }
-//                    } else {
-//                        mProgressDialog.dismiss();
-//                        Toast.makeText(ForgotPasswordActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//            });
+            Global.url = Global.baseUrl + Global.emailUrl;
+            Global.client = new AsyncHttpClient(true, 80, 443);
+            Global.params = new RequestParams();
+            Global.params.put("email", email);
+            Global.params.setUseJsonStreamer(true);
+
+            Global.client.get(Global.url, Global.params, new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                                    Toast.makeText(RequestDetailActivity.this, "Fail", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    JSONObject response = null;
+                    try {
+                        response = new JSONObject(responseString);
+                        if (response.getBoolean("Success") == true) {
+                            mProgressDialog.dismiss();
+                            JSONObject user = null;
+                            user = response.getJSONArray("User").getJSONObject(0);
+                            ResetPasswordActivity.mResetUser = user;
+                            startActivity(new Intent(ForgotPasswordActivity.this, ResetPasswordActivity.class));
+                        } else {
+                            new AlertDialog.Builder(ForgotPasswordActivity.this)
+                                    .setMessage("There is not User!")
+                                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    })
+                                    .show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
     }
 }

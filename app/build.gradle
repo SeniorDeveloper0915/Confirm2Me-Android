@@ -54,6 +54,7 @@ dependencies {
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:23.0.1'
     implementation 'com.android.support:design:23.0.1'
     // Google Play Service

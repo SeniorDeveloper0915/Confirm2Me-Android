@@ -7,15 +7,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.*;
+
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore.Video.Thumbnails;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -39,6 +44,9 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 
@@ -71,6 +79,8 @@ public class RequestDetailActivity extends Activity implements View.OnClickListe
     private ImageButton backButton;
     private ProgressDialog mProgressDialog;
 
+    private int intendedWidth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -85,6 +95,7 @@ public class RequestDetailActivity extends Activity implements View.OnClickListe
         arrowProvider = (ImageView)findViewById(R.id.arrowProvider);
         txtProviderName = (TextView)findViewById(R.id.txtProviderName);
         thumbnailView = (ImageView)findViewById(R.id.thumbnailView);
+
         videoView = (ViewGroup)findViewById(R.id.videoView);
         buttonView = (ViewGroup)findViewById(R.id.buttonView);
 
@@ -102,7 +113,7 @@ public class RequestDetailActivity extends Activity implements View.OnClickListe
         acceptButton.setOnTouchListener(Confirm2MeButtonListener.getInstance());
 
         mProgressDialog = new ProgressDialog(this, android.support.v4.app.DialogFragment.STYLE_NO_TITLE);
-        mProgressDialog.setMessage("LoadFing...");
+        mProgressDialog.setMessage("Loading...");
         mProgressDialog.setCancelable(false);
 
         loadRequestDetails();
@@ -433,7 +444,15 @@ public class RequestDetailActivity extends Activity implements View.OnClickListe
             finish();
         }
         else if (v == btnPlayVideo) {
-
+            Uri uri = null;
+            try {
+                uri = Uri.parse("http://18.235.201.14:8080/api/v1/download?filename=" + mDetailRequest.getString("video"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Intent in = new Intent(Intent.ACTION_VIEW);
+            in.setDataAndType(uri, "video/*");
+            startActivity(in);
         }
         else if (v == declineButton) {
             // Decline Request
@@ -558,28 +577,24 @@ public class RequestDetailActivity extends Activity implements View.OnClickListe
             try {
                 if (mDetailRequest.getString("video").equals("") == false ) {
                     videoView.setVisibility(View.VISIBLE);
-                    final VideoView video = (VideoView) findViewById(R.id.videoPlayingView);
-                    MediaController mediaController = new MediaController(this);
-                    mediaController.setAnchorView(videoView);
-
-                    Uri uri = Uri.parse("http://18.235.201.14:8080/api/v1/download?filename=" + mDetailRequest.getString("video"));
-                    video.setMediaController(mediaController);
-                    video.setVideoURI(uri);
-                    video.start();
-                    video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-
+                    final String strVideoURL = "http://18.235.201.14:8080/api/v1/download?filename=" + mDetailRequest.getString("video");
+                    AsyncTask.execute(new Runnable() {
                         @Override
-                        public void onPrepared(MediaPlayer mp) {
-                            video.start();
-                            video.pause();
+                        public void run() {
+                            try {
+                                LoadThumbnailImage(strVideoURL);
+                            } catch (Throwable throwable) {
+                                throwable.printStackTrace();
+                            }
                         }
                     });
-
                 } else {
                     videoView.setVisibility(View.INVISIBLE);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
             }
 
         }
@@ -617,13 +632,52 @@ public class RequestDetailActivity extends Activity implements View.OnClickListe
         }
     }
 
+
+    public void LoadThumbnailImage (String strVideoURL) throws Throwable {
+
+        Bitmap thumb;
+
+        thumb = retriveVideoFrameFromVideo(strVideoURL);
+        if (thumb != null) {
+            thumb = Bitmap.createScaledBitmap(thumb, 240, 240, false);
+            thumbnailView.setImageBitmap(thumb);
+        }
+    }
+
+    public static Bitmap retriveVideoFrameFromVideo(String videoPath)
+            throws Throwable {
+        Bitmap bitmap = null;
+        MediaMetadataRetriever mediaMetadataRetriever = null;
+        try {
+            mediaMetadataRetriever = new MediaMetadataRetriever();
+            if (Build.VERSION.SDK_INT >= 14)
+                mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
+            else
+                mediaMetadataRetriever.setDataSource(videoPath);
+
+            bitmap = mediaMetadataRetriever.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Throwable(
+                    "Exception in retriveVideoFrameFromVideo(String videoPath)"
+                            + e.getMessage());
+
+        } finally {
+            if (mediaMetadataRetriever != null) {
+                mediaMetadataRetriever.release();
+            }
+        }
+        return bitmap;
+    }
+
+
     /**
      *
      * @param path
      *            the path to the Video
      * @return a thumbnail of the video or null if retrieving the thumbnail failed.
      */
-    public static Bitmap getVidioThumbnail(String path) {
+    public Bitmap getVidioThumbnail(String path) {
         Bitmap bitmap = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
             bitmap = ThumbnailUtils.createVideoThumbnail(path, Thumbnails.MICRO_KIND);
@@ -661,6 +715,24 @@ public class RequestDetailActivity extends Activity implements View.OnClickListe
             } catch (final Exception ignored) {
             }
         }
+
+
+        mProgressDialog.show();
+        intendedWidth = thumbnailView.getWidth();
+        // Gets the downloaded image dimensions
+        int originalWidth = 1024;
+        int originalHeight = 768;
+        // Calculates the new dimensions
+        float scale = (float) intendedWidth / originalWidth;
+        int newHeight = (int) Math.round(originalHeight * scale);
+
+        // Resizes mImageView. Change "FrameLayout" to whatever layout mImageView is located in.
+        thumbnailView.setLayoutParams(new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT));
+        thumbnailView.getLayoutParams().width = intendedWidth;
+        thumbnailView.getLayoutParams().height = newHeight;
+        mProgressDialog.dismiss();
         return bitmap;
     }
 }

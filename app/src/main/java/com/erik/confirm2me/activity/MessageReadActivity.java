@@ -34,6 +34,7 @@ import com.erik.confirm2me.Global;
 import com.erik.confirm2me.R;
 import com.erik.confirm2me.customcontrol.Confirm2MeButtonListener;
 import com.erik.confirm2me.helper.CameraPreview;
+import com.google.gson.JsonObject;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -44,11 +45,13 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
 
 
 public class MessageReadActivity extends Activity implements View.OnClickListener {
@@ -201,11 +204,48 @@ public class MessageReadActivity extends Activity implements View.OnClickListene
                                     try {
                                         response = new JSONObject(responseString);
                                         if (response.getBoolean("Success") == true) {
+
                                             new AlertDialog.Builder(MessageReadActivity.this)
                                                     .setMessage("Submitted video!")
                                                     .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
+                                                            Global.url = Global.baseUrl + Global.requesterUrl;
+                                                            Global.client = new AsyncHttpClient(true, 80, 443);
+                                                            Global.params = new RequestParams();
+                                                            try {
+                                                                Global.params.put("requester", mDetailRequest.get("Requester").toString());
+                                                                Global.params.put("provider", mDetailRequest.get("provider_pNumber").toString());
+                                                                Global.params.setUseJsonStreamer(true);
+                                                            } catch (JSONException e) {
+                                                                e.printStackTrace();
+                                                            }
+
+                                                            Global.client.get(Global.url, Global.params, new TextHttpResponseHandler() {
+                                                                @Override
+                                                                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                    Toast.makeText(RequestDetailActivity.this, "Fail", Toast.LENGTH_LONG).show();
+                                                                }
+
+                                                                @Override
+                                                                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                                                                    JSONObject response = null;
+                                                                    try {
+                                                                        response = new JSONObject(responseString);
+                                                                        if (response.getBoolean("Success") == true) {
+                                                                            JSONObject requester = new JSONObject();
+                                                                            JSONObject provider = new JSONObject();
+
+                                                                            requester = response.getJSONArray("Requester").getJSONObject(0);
+                                                                            provider = response.getJSONArray("Provider").getJSONObject(0);
+
+                                                                            sendPushnotification(requester, provider);
+                                                                        }
+                                                                    } catch (JSONException e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                }
+                                                            });
                                                             Intent returnIntent = new Intent();
                                                             setResult(Activity.RESULT_OK,returnIntent);
                                                             finish();
@@ -291,6 +331,48 @@ public class MessageReadActivity extends Activity implements View.OnClickListene
         }
     }
 
+    private void sendPushnotification(JSONObject requester, JSONObject provider) {
+        String pushMsg = null;
+        try {
+            pushMsg = String.format("%s %s submitted video to %s %s", provider.getString("firstname"), provider.getString("lastname"), requester.getString("firstname"), requester.getString("lastname"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Global.client = new AsyncHttpClient();
+        Global.client.addHeader("Content-Type", "application/json");
+        Global.client.addHeader("Authorization", Global.key);
+        JSONObject jsonParams = new JSONObject();
+        StringEntity jsonEntity = null;
+
+        try {
+            jsonParams.put("to", requester.getString("FCM_Token"));
+            JSONObject notification = new JSONObject();
+            notification.put("title", "Confirm2Me");
+            notification.put("body", pushMsg);
+            jsonParams.put("notification", notification);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            jsonEntity = new StringEntity(jsonParams.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Global.client.post(getApplicationContext(), "https://fcm.googleapis.com/fcm/send", jsonEntity, "application/json",
+                new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        super.onSuccess(statusCode, headers, response);
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        super.onFailure(statusCode, headers, throwable, errorResponse);
+                    }
+                });
+    }
+
     /*** Update TextView Task ***/
     private Runnable mUpdateTimeTask = new Runnable() {
         public void run() {
@@ -322,7 +404,7 @@ public class MessageReadActivity extends Activity implements View.OnClickListene
                 public void run() {
                     (MessageReadActivity.this).runOnUiThread(mUpdateTimeTask);
                 }
-            }, 1000, 1000);
+            }, 500, 500);
             // initialize video camera
             if (prepareVideoRecorder()) {
                 // Camera is available and unlocked, MediaRecorder is prepared,
@@ -456,7 +538,7 @@ public class MessageReadActivity extends Activity implements View.OnClickListene
 
         // Get the SurfaceView layout parameters
         android.view.ViewGroup.LayoutParams lp = cameraPreView.getLayoutParams();
-        lp.width = (int) (screenProportion * lp.height);
+        lp.width = (int) (lp.height * screenProportion);
         // Commit the layout parameters
         cameraPreView.setLayoutParams(lp);
     }

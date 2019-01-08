@@ -144,6 +144,7 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener{
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case R.id.menu_verify_pin: {
+                                Global.fragment = 2;
                                 getActivity().startActivityForResult(new Intent(getActivity(), VerifyPinActivity.class), REQUEST_VERIFY_PIN);
                                 break;
                             }
