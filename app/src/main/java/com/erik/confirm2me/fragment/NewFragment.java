@@ -351,7 +351,6 @@ public class NewFragment extends Fragment implements View.OnClickListener {
                                 mCategoryDescription.setText(null);
                                 Toast.makeText(getActivity(), "Successfully Submitted!", Toast.LENGTH_SHORT).show();
                                 sendPushnotification(user);
-                                startActivity(new Intent(getContext(), GivenFragment.class));
                             } else {
                                 Toast.makeText(getActivity(), response.getString("Message"), Toast.LENGTH_SHORT).show();
                             }

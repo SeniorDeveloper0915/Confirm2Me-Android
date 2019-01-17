@@ -98,10 +98,15 @@ public class ForgotPasswordActivity extends Activity implements View.OnClickList
                         response = new JSONObject(responseString);
                         if (response.getBoolean("Success") == true) {
                             mProgressDialog.dismiss();
-                            JSONObject user = null;
-                            user = response.getJSONArray("User").getJSONObject(0);
-                            ResetPasswordActivity.mResetUser = user;
-                            startActivity(new Intent(ForgotPasswordActivity.this, ResetPasswordActivity.class));
+                            new AlertDialog.Builder(ForgotPasswordActivity.this)
+                                    .setMessage("Password Reset Email is sent to your email! Please Check your Email Box")
+                                    .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class));
+                                        }
+                                    })
+                                    .show();
                         } else {
                             new AlertDialog.Builder(ForgotPasswordActivity.this)
                                     .setMessage("There is not User!")
